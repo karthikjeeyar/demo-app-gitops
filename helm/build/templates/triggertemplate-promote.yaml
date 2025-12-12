@@ -53,7 +53,7 @@ spec:
           serviceAccountName: pipeline
         timeout: 1h0m0s
         workspaces:
-          - name: images-url
+          - name: image-url
             volumeClaimTemplate:
               spec:
                 accessModes:
