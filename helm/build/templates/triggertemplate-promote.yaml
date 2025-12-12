@@ -33,7 +33,8 @@ spec:
           - name: source-image-tag
             value: $(tt.params.source-tag)
           - name: destination-image-tag
-            value: $(tt.params.destination-tag)
+            value: $(uid)
+            # value: $(tt.params.destination-tag)
           - name: namespace
             value: $(tt.params.namespace)
           - name: git-host
