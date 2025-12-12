@@ -10,7 +10,7 @@ app:
 
 image:
   name: demo-nodejs-ex
- tag: preprod
+  tag: preprod
 
 
 replicaCount: 2
