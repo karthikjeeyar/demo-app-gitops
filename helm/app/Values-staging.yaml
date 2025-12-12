@@ -10,7 +10,7 @@ app:
 
 image:
   name: demo-nodejs-ex
-  tag: 9f95966f-ea45-4fda-b3dd-1ae7f3a8157d
+  tag: bc005e63-f16a-4962-874a-319a7bf68fec
 
 
 replicaCount: 2
