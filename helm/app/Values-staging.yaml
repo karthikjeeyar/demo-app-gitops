@@ -9,7 +9,7 @@ app:
 
 
 image:
-  name: demo-nodejs-ex
+   tag: preprod
   tag: latest
 
 
