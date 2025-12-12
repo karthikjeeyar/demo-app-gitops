@@ -25,20 +25,44 @@ spec:
             name: cel
       template:
         ref: {{ .Values.app.name }}-tt-run-build
+
+    # Tag trigger (for releases/promotions)
     - bindings:
         - kind: TriggerBinding
-          ref: tag-binding-stagin
+          ref: tag-binding-staging
       interceptors:
-        - params:
+        - ref:
+            kind: ClusterInterceptor
+            name: github
+          # params:
+          #   - name: secretRef
+          #     value:
+          #       secretName: github-webhook-secret
+          #       secretKey: webhook-secret
+        - ref:
+            kind: ClusterInterceptor
+            name: cel
+          params:
             - name: filter
-              value: body.object_kind == 'tag_push'
+              value: body.ref.startsWith('refs/tags/')
             - name: overlays
               value:
                 - expression: 'body.ref.split(''/'')[2]'
                   key: tag_version
-          ref:
-            kind: ClusterInterceptor
-            name: cel
+    # - bindings:
+    #     - kind: TriggerBinding
+    #       ref: tag-binding-stagin
+    #   interceptors:
+    #     - params:
+    #         - name: filter
+    #           value: body.object_kind == 'tag_push'
+    #         - name: overlays
+    #           value:
+    #             - expression: 'body.ref.split(''/'')[2]'
+    #               key: tag_version
+    #       ref:
+    #         kind: ClusterInterceptor
+    #         name: cel
       name: tag-trig-staging
       template:
         ref: {{ .Values.app.name }}-tt-run-promote
