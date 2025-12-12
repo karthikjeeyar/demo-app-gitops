@@ -4,8 +4,13 @@
 
 app:
   name: demo-app
-            tag: preprod
+  namespace: demo-app-staging
   cluster: your-cluster.example.com
+
+
+image:
+  name: demo-nodejs-ex
+  tag: latest
 
 
 replicaCount: 2
