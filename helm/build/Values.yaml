@@ -1,0 +1,30 @@
+
+app:
+  name: demo-app
+  namespace: demo-app-dev
+  cluster: your-cluster.example.com
+
+git:
+  branch: master
+  repo: https://github.com/karthikjeeyar/demo-app.git
+  org: karthikjeeyar
+  name: demo-app
+  host: github.com
+  token: ''
+  webhookSecret: ''
+
+# Sealed Secrets configuration
+# Sealed Secrets allow you to store encrypted secrets in Git
+# To use: 1) Install Sealed Secrets Controller, 2) Seal your secret with kubeseal, 3) Set enabled: true
+sealedSecrets:
+  enabled: true  # Set to true to use Sealed Secrets (requires properly sealed dockerconfigjson)
+  dockerconfigjson: AgA0c1Lv4c11wroDhAIPeiNas84CgJODRSIR4WwHBm2Pq5USv2dw5Cz4ctyXvanNP4t20eA4qWCCzFBA94jFzl2Iu4N2GMxLBJ+S2GdzUsIgadiLUniMWZEcgRi+DQYeM/F/REY99zIcy45tI8k6bfqqfmHmTycy5PfTi4vxXceIp78X0XsOrpqDmDJeNzS5s7NfLiMvnSnjP++F6cBldVCx5A8ITs4MhkzhWg2/zBNqeLFuXvwQx48c8nxApfaKfbUL7piKGjwFis+AeQtmHyCVctWNe4Zao9NawKrP0tRdOFNpefZgU9EpOinEhzJfKQYYjHWjQIlec35ntx+gzQZftxVWYkFQySPuCYKzaZmwA0EMS/9AqXfvjdQ8NImQ4zSVrHuLQryy/4dabIXI+hnbJw9TiMrbmfCSBmHUz7tn/w+h4bUY8zS9pNZOF6mYpW8Cj9Xtt4zHtVdEdKl6vq1qzAaxgs+tz4Z+r5b4cjKhP0+Lp/DukUke70h6+bzKGLn+bVMxlFiVqy0BENBOxBSr1jtVpektokITeDSgr8oHeMzlhm7FX4d0x8nT6IqKWiRIubdcY9BzWecYfcR+u9Vr+3nueS8E7lzkY5gOnJ0yWBsLhbKJ1Z2rg1pxFuA4rYWiZPiyGwWCsihTFDp+gskd6qppzYe7vsqERrDNsEue+YX0iZTbvbA4a+U9fAbNbkrI8ZwIGnoUcN8pkBPzrkayQQwHEMw8CWB2wu/ZtFdHRAMgZxW3w7uuzYQfFW3J3YLpilbX6ki/A9kfIGPOqHFWLrxlCpcPhgyDTgEzgPDTRzfOQVAZjnOGiPjQVyRE+S2opwhaiXgMeFj5nqJpQR/rrHDtX0jkFgneSyGtdFjxioYqnIoVeHDpg9QAhR6FTZePTR25xD81van308mQ+hj9vJ8ppJDR6kL3bjaBowL13ZUkTQ==
+
+
+image:
+  registry: quay.io
+  organization: karthik_jk
+  host: quay.io
+  name: demo-nodejs-ex
+  tag: latest
+  secretName: registry-credentials

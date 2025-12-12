@@ -1,0 +1,44 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: {{ .Values.app.name }}-el
+  namespace: {{ .Values.app.namespace }}
+  labels:
+    type: event-listener
+    backstage.io/kubernetes-id: {{ .Values.app.name }}
+spec:
+  namespaceSelector: {}
+  resources: {}
+  serviceAccountName: pipeline
+  triggers:
+    - bindings:
+        - kind: ClusterTriggerBinding
+          ref: github-push
+      interceptors:
+        - params:
+            - name: filter
+              value: has(body.commits) && body.object_kind == 'push'
+            - name: overlays
+              value: null
+          ref:
+            kind: ClusterInterceptor
+            name: cel
+      template:
+        ref: {{ .Values.app.name }}-tt-run-build
+    - bindings:
+        - kind: TriggerBinding
+          ref: tag-binding-stagin
+      interceptors:
+        - params:
+            - name: filter
+              value: body.object_kind == 'tag_push'
+            - name: overlays
+              value:
+                - expression: 'body.ref.split(''/'')[2]'
+                  key: tag_version
+          ref:
+            kind: ClusterInterceptor
+            name: cel
+      name: tag-trig-staging
+      template:
+        ref: {{ .Values.app.name }}-tt-run-promote
