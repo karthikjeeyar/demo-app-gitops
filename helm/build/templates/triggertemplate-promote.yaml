@@ -7,7 +7,7 @@ spec:
   params:
     - name: source-image
       description: The source image to promote
-      default: {{ include "image.dev-url" . }}
+      default: quay.io/karthik_jk/demo-nodejs-ex
     - name: destination-image
       description: The destination to copy the image to
       default: {{ include "image.preprod-url" . }}
