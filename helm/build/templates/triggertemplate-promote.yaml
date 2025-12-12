@@ -49,7 +49,17 @@ spec:
         pipelineRef:
           name: {{ .Values.app.name }}-promote
         serviceAccountName: pipeline
+        taskRunTemplate:
+          serviceAccountName: pipeline
         timeout: 1h0m0s
         workspaces:
           - name: images-url
-            emptyDir: {}
+            volumeClaimTemplate:
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 1Gi
+                storageClassName: gp3-csi
+                volumeMode: Filesystem
